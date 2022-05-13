@@ -1,4 +1,9 @@
-import { renderBars, animateSelectionSort, animateBubbleSort } from "./render.js";
+import {
+  renderBars,
+  animateSelectionSort,
+  animateInsertionSort,
+  animateBubbleSort
+} from "./render.js";
 import { selectionSort } from "./selectionSort.js";
 import { insertionSort } from "./insertionSort.js";
 import { bubbleSort } from "./bubbleSort.js";
@@ -7,7 +12,7 @@ import { quicksort } from "./quicksort.js";
 const SIZE = 100;
 const MIN_HEIGHT = 25;
 const MAX_HEIGHT = 600;
-const SPEED = 300;
+const SPEED = 3;
 let bars = [];
 let algorithm = selectionSort;
 let animation = animateSelectionSort;
@@ -30,6 +35,7 @@ $(".algorithms-list>li").click(function (event) {
       break;
     case "Insertion Sort":
       algorithm = insertionSort;
+      animation = animateInsertionSort;
       break;
     case "Bubble Sort":
       algorithm = bubbleSort;

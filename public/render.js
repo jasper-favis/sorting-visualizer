@@ -41,6 +41,46 @@ export function animateSelectionSort(animationsOrder, bars, speedInMilliseconds)
   })
 }
 
+export function animateInsertionSort(animationsOrder, bars, speedInMilliseconds) {
+  animationsOrder.forEach((animation, index) => {
+    const {
+      isComparison,
+      isComparisonStart,
+      isShift,
+      isKeySet,
+      indices,
+      height,
+      shiftIndex,
+      keyIndex,
+      sortedBars } = animation;
+    const blue = "#5E95BD";
+    const green = "#00CDAB"
+    if (isComparison) {
+      const [i, j] = indices;
+      const color = isComparisonStart ? blue : "black";
+      setTimeout(() => {
+        setBarColor(bars, i, color);
+        setBarColor(bars, j, color);
+      }, index * speedInMilliseconds);
+    } else if (isShift) {
+      setTimeout(() => {
+        setBarHeight(bars, shiftIndex, height);
+      }, index * speedInMilliseconds);
+    } else if (isKeySet) {
+      setTimeout(() => {
+        setBarHeight(bars, keyIndex, height);
+      }, index * speedInMilliseconds);
+    } else {
+      setTimeout(() => {
+        sortedBars.forEach((sortedBarIndex) => {
+          setBarColor(bars, sortedBarIndex, green);
+        })
+      }, index * speedInMilliseconds);
+
+    }
+  })
+}
+
 export function animateBubbleSort(animationsOrder, bars, speedInMilliseconds) {
   animationsOrder.forEach((animation, index) => {
     const {
@@ -74,9 +114,3 @@ export function animateBubbleSort(animationsOrder, bars, speedInMilliseconds) {
   })
 }
 
-// FOR DEBUGGING PURPOSES
-function print(array) {
-  for (let x of array) {
-    console.log(x);
-  }
-}
