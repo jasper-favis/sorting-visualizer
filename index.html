@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting Visualizer</title>
+  <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+  <div class="page-container">
+    <div class="nav-container">
+      <nav>
+        <div class="nav-logo-container nav">
+          <div class="nav-logo">Sorting Visualizer</div>
+        </div>
+        <div id="choose-algorithm-button" class="nav">
+          Choose Algorithm
+          <ul class="algorithms-list dd-menu">
+            <li>Selection Sort</li>
+            <li>Insertion Sort</li>
+            <li>Bubble Sort</li>
+            <li>Quicksort</li>
+          </ul>
+        </div>            
+      </nav>
+    </div>
+    <div class="content-wrap">
+      <div class="controls-container">
+        <div class="selected-algorithm">Selection Sort</div>
+        <div class="controls">
+          <div id="sort-button" class="controls-button">Sort</div>
+          <div id="random-button" class="controls-button">Random</div>
+        </div>
+      </div>
+      <div class="bars-container">
+        <div class="bars">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="module" src="main.js"></script>
+</body>
+</html>

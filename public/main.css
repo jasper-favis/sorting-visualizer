@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400&family=Oswald:wght@200;300;400&display=swap');
+
+:root {
+  --primary-font: 'Montserrat', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--primary-font);
+}
+
+.page-container {
+  width: 100%;
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-container {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(79, 114, 143);
+}
+
+nav {
+  width: 1200px;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: rgb(255, 255, 255);
+}
+
+.nav {
+  height: 100%;
+  min-width: 200px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.nav:not(:last-child) {
+  margin-right: 15px;
+}
+
+.dd-menu {
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+  transform: translateY(105%);
+  background-color: rgb(79, 114, 143);
+}
+
+.dd-menu>li {
+  padding: 20px 20px;
+  white-space: nowrap;
+}
+
+.dd-menu>li:hover {
+  background-color: rgb(115, 165, 206);
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-out;
+}
+
+.algorithms-list {
+  display: none;
+}
+
+.content-wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.controls-container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.selected-algorithm {
+  padding-bottom: 20px;
+}
+
+.controls {
+  display: flex;
+}
+
+.controls-button {
+  font-size: 0.8rem;
+  padding: 15px 20px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.controls-button:not(:last-child) {
+  margin-right: 20px;
+}
+
+.bar {
+  display: inline-block;
+  width: 4px;
+  background-color: rgb(0, 0, 0);
+}
+
+.bar:not(:last-child) {
+  margin-right: 2px;
+}
+
+.display {
+  display: block;
+}
+
+.displayFlex {
+  display: flex;
+}
