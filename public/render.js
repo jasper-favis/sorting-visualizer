@@ -22,28 +22,35 @@ export function setBarColor(array, index, color) {
 export function animateSelectionSort(animationsOrder, bars, speedInMilliseconds, inProgress) {
   inProgress = true;
   animationsOrder.forEach((animation, index) => {
-    const { isComparison, isComparisonStart, indices, heights } = animation;
-    const [i, j] = indices;
-    const blue = "#5E95BD";
+    const { type, indices, heights, sortedIndex, sortedHeight } = animation;
+    const yellow = "yellow";
+    const black = "black";
     const green = "#00CDAB"
-    if (isComparison) {
-      const color = isComparisonStart ? "yellow" : "black";
-      setTimeout(() => {
-        setBarColor(bars, i, color);
-        setBarColor(bars, j, color);
-      }, index * speedInMilliseconds);
-    } else {
-      const [heightI, heightJ] = heights;
-      setTimeout(() => {
-        setBarHeight(bars, i, heightI);
-        setBarHeight(bars, j, heightJ);
-        setBarColor(bars, i, green);
-      }, index * speedInMilliseconds);
-    }
-    if (index === animationsOrder.length - 1) {
-      setTimeout(() => {
-        inProgress = false;
-      }, index * speedInMilliseconds);
+    switch (type) {
+      case "Start Comparison Animation": {
+        setTimeout(() => {
+          const [i, j] = indices;
+          setBarColor(bars, i, yellow);
+          setBarColor(bars, j, yellow);
+        }, index * speedInMilliseconds);
+        break;
+      }
+      case "End Comparison Animation": {
+        setTimeout(() => {
+          const [i, j] = indices;
+          setBarColor(bars, i, black);
+          setBarColor(bars, j, black);
+        }, index * speedInMilliseconds);
+        break;
+      }
+      case "Sorted Animation": {
+        setTimeout(() => {
+          setBarHeight(bars, sortedIndex, sortedHeight);
+          setBarColor(bars, sortedIndex, green);
+        }, index * speedInMilliseconds);
+        break;
+      }
+      default:
     }
   })
 }

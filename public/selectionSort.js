@@ -7,27 +7,24 @@ export function selectionSort(array) {
     indexOfSmallest = getIndexOfSmallest(array, i, animationsOrder);
 
     // Store start and end comparison animations.
-    let startAnimation = {};
-    startAnimation.isComparison = true;
-    startAnimation.isComparisonStart = true;
-    startAnimation.indices = [i, indexOfSmallest];
-    animationsOrder.push(startAnimation);
+    const startComparisonAnimation = {};
+    startComparisonAnimation.type = "Start Comparison Animation";
+    startComparisonAnimation.indices = [i, indexOfSmallest];
+    animationsOrder.push(startComparisonAnimation);
 
-    let endAnimation = {};
-    endAnimation.isComparison = true;
-    endAnimation.isComparisonStart = false;
-    endAnimation.indices = [i, indexOfSmallest];
-    animationsOrder.push(endAnimation);
+    const endComparisonAnimation = {};
+    endComparisonAnimation.type = "End Comparison Animation";
+    endComparisonAnimation.indices = [i, indexOfSmallest];
+    animationsOrder.push(endComparisonAnimation);
 
     swap(array, i, indexOfSmallest);
 
-    // Store swap animation.
-    let swapAnimation = {};
-    swapAnimation.isComparison = false;
-    swapAnimation.isComparisonStart = false;
-    swapAnimation.indices = [i, indexOfSmallest];
-    swapAnimation.heights = [array[i], array[indexOfSmallest]];
-    animationsOrder.push(swapAnimation);
+    // Store set animation.
+    const sortedAnimation = {};
+    sortedAnimation.type = "Sorted Animation";
+    sortedAnimation.sortedIndex = i;
+    sortedAnimation.sortedHeight = array[i];
+    animationsOrder.push(sortedAnimation);
   }
   return animationsOrder;
 }
@@ -37,17 +34,15 @@ function getIndexOfSmallest(array, start, animationsOrder) {
   for (let i = start + 1; i < array.length; i++) {
 
     // Store start and end comparison animations.
-    let startAnimation = {};
-    startAnimation.isComparison = true;
-    startAnimation.isComparisonStart = true;
-    startAnimation.indices = [i, indexOfSmallest];
-    animationsOrder.push(startAnimation);
+    const startComparisonAnimation = {};
+    startComparisonAnimation.type = "Start Comparison Animation";
+    startComparisonAnimation.indices = [i, indexOfSmallest];
+    animationsOrder.push(startComparisonAnimation);
 
-    let endAnimation = {};
-    endAnimation.isComparison = true;
-    endAnimation.isComparisonStart = false;
-    endAnimation.indices = [i, indexOfSmallest];
-    animationsOrder.push(endAnimation);
+    const endComparisonAnimation = {};
+    endComparisonAnimation.type = "End Comparison Animation";
+    endComparisonAnimation.indices = [i, indexOfSmallest];
+    animationsOrder.push(endComparisonAnimation);
 
     if (array[i] < array[indexOfSmallest]) {
       indexOfSmallest = i;
