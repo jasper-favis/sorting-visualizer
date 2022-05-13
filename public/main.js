@@ -16,6 +16,7 @@ const SPEED = 3;
 let bars = [];
 let algorithm = selectionSort;
 let animation = animateSelectionSort;
+let sortingInProgress = false;
 
 $(document).ready(function () {
   bars = getRandomBars();

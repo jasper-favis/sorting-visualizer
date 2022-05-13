@@ -22,18 +22,8 @@ function partition(array, low, high) {
       i++;
       swap(array, i, j);
     }
-    setTimeout(() => {
-      setBarHeight(array, i);
-      setBarHeight(array, j);
-      setBarColor(array, j, "rgb(0, 205, 171)");
-    }, time);
   }
   swap(array, i + 1, high);
-  setTimeout(() => {
-    setBarHeight(array, high);
-    setBarHeight(array, i + 1);
-    setBarColor(array, i + 1, "rgb(0, 205, 171)");
-  }, time + 200);
   return i + 1;
 }
 

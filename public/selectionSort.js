@@ -26,6 +26,7 @@ export function selectionSort(array) {
     swapAnimation.isComparison = false;
     swapAnimation.isComparisonStart = false;
     swapAnimation.indices = [i, indexOfSmallest];
+    swapAnimation.heights = [array[i], array[indexOfSmallest]];
     animationsOrder.push(swapAnimation);
   }
   return animationsOrder;

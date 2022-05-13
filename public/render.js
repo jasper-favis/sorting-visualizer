@@ -19,29 +19,45 @@ export function setBarColor(array, index, color) {
   $(id).css("background-color", color);
 }
 
-export function animateSelectionSort(animationsOrder, bars, speedInMilliseconds) {
+export function animateSelectionSort(animationsOrder, bars, speedInMilliseconds, inProgress) {
+  inProgress = true;
+  // FOR DEBUGGING PURPOSES
+  console.log("Sorting in progress: " + inProgress);
   animationsOrder.forEach((animation, index) => {
-    const { isComparison, isComparisonStart, indices } = animation;
+    const { isComparison, isComparisonStart, indices, heights } = animation;
     const [i, j] = indices;
     const blue = "#5E95BD";
     const green = "#00CDAB"
     if (isComparison) {
-      const color = isComparisonStart ? blue : "black";
+      const color = isComparisonStart ? "yellow" : "black";
       setTimeout(() => {
         setBarColor(bars, i, color);
         setBarColor(bars, j, color);
       }, index * speedInMilliseconds);
     } else {
+      const [heightI, heightJ] = heights;
       setTimeout(() => {
-        setBarHeight(bars, i, bars[i]);
-        setBarHeight(bars, j, bars[j]);
+        setBarHeight(bars, i, heightI);
+        setBarHeight(bars, j, heightJ);
         setBarColor(bars, i, green);
+      }, index * speedInMilliseconds);
+    }
+    if (index === animationsOrder.length - 1) {
+      setTimeout(() => {
+        inProgress = false;
+
+        // FOR DEBUGGING PURPOSES
+        console.log("Sorting in progress: " + inProgress);
+
       }, index * speedInMilliseconds);
     }
   })
 }
 
-export function animateInsertionSort(animationsOrder, bars, speedInMilliseconds) {
+export function animateInsertionSort(animationsOrder, bars, speedInMilliseconds, inProgress) {
+  inProgress = true;
+  // FOR DEBUGGING PURPOSES
+  console.log("Sorting in progress: " + inProgress);
   animationsOrder.forEach((animation, index) => {
     const {
       isComparison,
@@ -57,7 +73,7 @@ export function animateInsertionSort(animationsOrder, bars, speedInMilliseconds)
     const green = "#00CDAB"
     if (isComparison) {
       const [i, j] = indices;
-      const color = isComparisonStart ? blue : "black";
+      const color = isComparisonStart ? "yellow" : "black";
       setTimeout(() => {
         setBarColor(bars, i, color);
         setBarColor(bars, j, color);
@@ -76,12 +92,23 @@ export function animateInsertionSort(animationsOrder, bars, speedInMilliseconds)
           setBarColor(bars, sortedBarIndex, green);
         })
       }, index * speedInMilliseconds);
+    }
+    if (index === animationsOrder.length - 1) {
+      setTimeout(() => {
+        inProgress = false;
 
+        // FOR DEBUGGING PURPOSES
+        console.log("Sorting in progress: " + inProgress);
+
+      }, index * speedInMilliseconds);
     }
   })
 }
 
-export function animateBubbleSort(animationsOrder, bars, speedInMilliseconds) {
+export function animateBubbleSort(animationsOrder, bars, speedInMilliseconds, inProgress) {
+  inProgress = true;
+  // FOR DEBUGGING PURPOSES
+  console.log("Sorting in progress: " + inProgress);
   animationsOrder.forEach((animation, index) => {
     const {
       isComparison,
@@ -94,7 +121,7 @@ export function animateBubbleSort(animationsOrder, bars, speedInMilliseconds) {
     const green = "#00CDAB"
     if (isComparison) {
       const [i, j] = indices;
-      const color = isComparisonStart ? blue : "black";
+      const color = isComparisonStart ? "yellow" : "black";
       setTimeout(() => {
         setBarColor(bars, i, color);
         setBarColor(bars, j, color);
@@ -109,6 +136,15 @@ export function animateBubbleSort(animationsOrder, bars, speedInMilliseconds) {
       setTimeout(() => {
         setBarHeight(bars, i, heightI);
         setBarHeight(bars, j, heightJ);
+      }, index * speedInMilliseconds);
+    }
+    if (index === animationsOrder.length - 1) {
+      setTimeout(() => {
+        inProgress = false;
+
+        // FOR DEBUGGING PURPOSES
+        console.log("Sorting in progress: " + inProgress);
+
       }, index * speedInMilliseconds);
     }
   })
