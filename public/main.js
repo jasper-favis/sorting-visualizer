@@ -2,7 +2,8 @@ import {
   renderBars,
   animateSelectionSort,
   animateInsertionSort,
-  animateBubbleSort
+  animateBubbleSort,
+  animateQuicksort
 } from "./render.js";
 import { selectionSort } from "./selectionSort.js";
 import { insertionSort } from "./insertionSort.js";
@@ -44,6 +45,7 @@ $(".algorithms-list>li").click(function (event) {
       break;
     case "Quicksort":
       algorithm = quicksort;
+      animation = animateQuicksort;
       break;
     default:
       algorithm = selectionSort;

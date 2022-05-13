@@ -21,8 +21,6 @@ export function setBarColor(array, index, color) {
 
 export function animateSelectionSort(animationsOrder, bars, speedInMilliseconds, inProgress) {
   inProgress = true;
-  // FOR DEBUGGING PURPOSES
-  console.log("Sorting in progress: " + inProgress);
   animationsOrder.forEach((animation, index) => {
     const { isComparison, isComparisonStart, indices, heights } = animation;
     const [i, j] = indices;
@@ -45,10 +43,6 @@ export function animateSelectionSort(animationsOrder, bars, speedInMilliseconds,
     if (index === animationsOrder.length - 1) {
       setTimeout(() => {
         inProgress = false;
-
-        // FOR DEBUGGING PURPOSES
-        console.log("Sorting in progress: " + inProgress);
-
       }, index * speedInMilliseconds);
     }
   })
@@ -56,8 +50,6 @@ export function animateSelectionSort(animationsOrder, bars, speedInMilliseconds,
 
 export function animateInsertionSort(animationsOrder, bars, speedInMilliseconds, inProgress) {
   inProgress = true;
-  // FOR DEBUGGING PURPOSES
-  console.log("Sorting in progress: " + inProgress);
   animationsOrder.forEach((animation, index) => {
     const {
       isComparison,
@@ -96,10 +88,6 @@ export function animateInsertionSort(animationsOrder, bars, speedInMilliseconds,
     if (index === animationsOrder.length - 1) {
       setTimeout(() => {
         inProgress = false;
-
-        // FOR DEBUGGING PURPOSES
-        console.log("Sorting in progress: " + inProgress);
-
       }, index * speedInMilliseconds);
     }
   })
@@ -107,8 +95,6 @@ export function animateInsertionSort(animationsOrder, bars, speedInMilliseconds,
 
 export function animateBubbleSort(animationsOrder, bars, speedInMilliseconds, inProgress) {
   inProgress = true;
-  // FOR DEBUGGING PURPOSES
-  console.log("Sorting in progress: " + inProgress);
   animationsOrder.forEach((animation, index) => {
     const {
       isComparison,
@@ -141,10 +127,56 @@ export function animateBubbleSort(animationsOrder, bars, speedInMilliseconds, in
     if (index === animationsOrder.length - 1) {
       setTimeout(() => {
         inProgress = false;
+      }, index * speedInMilliseconds);
+    }
+  })
+}
 
-        // FOR DEBUGGING PURPOSES
-        console.log("Sorting in progress: " + inProgress);
-
+export function animateQuicksort(animationsOrder, bars, speedInMilliseconds, inProgress) {
+  inProgress = true;
+  animationsOrder.forEach((animation, index) => {
+    const {
+      type,
+      indices,
+      heights } = animation;
+    const green = "#00CDAB"
+    switch (type) {
+      case "Start Comparison Animation": {
+        const [i, j] = indices;
+        setTimeout(() => {
+          setBarColor(bars, i, "yellow");
+          setBarColor(bars, j, "yellow");
+        }, index * speedInMilliseconds);
+        break;
+      }
+      case "End Comparison Animation": {
+        const [i, j] = indices;
+        setTimeout(() => {
+          setBarColor(bars, i, "black");
+          setBarColor(bars, j, "black");
+        }, index * speedInMilliseconds);
+        break;
+      }
+      case "Swap Animation": {
+        const [i, j] = indices;
+        const [heightI, heightJ] = heights;
+        setTimeout(() => {
+          setBarHeight(bars, i, heightI);
+          setBarHeight(bars, j, heightJ);
+        }, index * speedInMilliseconds);
+        break;
+      }
+      default:
+    }
+    if (index === animationsOrder.length - 1) {
+      // Completed Sort Animation.
+      setTimeout(() => {
+        for (let i = 0; i < bars.length; i++) {
+          setTimeout(() => {
+            setBarColor(bars, i, green);
+          }, i * speedInMilliseconds);
+        }
+        inProgress = false;
       }, index * speedInMilliseconds);
     }
   })
