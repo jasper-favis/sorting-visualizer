@@ -1,23 +1,23 @@
 import { setBarHeight, setBarColor } from "./render.js";
 
 export function selectionSort(array) {
-  let animationOrder = [];
+  let animationsOrder = [];
   let indexOfSmallest;
   for (let i = 0; i < array.length; i++) {
-    indexOfSmallest = getIndexOfSmallest(array, i, animationOrder);
+    indexOfSmallest = getIndexOfSmallest(array, i, animationsOrder);
 
     // Store start and end comparison animations.
     let startAnimation = {};
     startAnimation.isComparison = true;
     startAnimation.isComparisonStart = true;
     startAnimation.indices = [i, indexOfSmallest];
-    animationOrder.push(startAnimation);
+    animationsOrder.push(startAnimation);
 
     let endAnimation = {};
     endAnimation.isComparison = true;
     endAnimation.isComparisonStart = false;
     endAnimation.indices = [i, indexOfSmallest];
-    animationOrder.push(endAnimation);
+    animationsOrder.push(endAnimation);
 
     swap(array, i, indexOfSmallest);
 
@@ -26,12 +26,12 @@ export function selectionSort(array) {
     swapAnimation.isComparison = false;
     swapAnimation.isComparisonStart = false;
     swapAnimation.indices = [i, indexOfSmallest];
-    animationOrder.push(swapAnimation);
+    animationsOrder.push(swapAnimation);
   }
-  return animationOrder;
+  return animationsOrder;
 }
 
-function getIndexOfSmallest(array, start, animationOrder) {
+function getIndexOfSmallest(array, start, animationsOrder) {
   let indexOfSmallest = start;
   for (let i = start + 1; i < array.length; i++) {
 
@@ -40,13 +40,13 @@ function getIndexOfSmallest(array, start, animationOrder) {
     startAnimation.isComparison = true;
     startAnimation.isComparisonStart = true;
     startAnimation.indices = [i, indexOfSmallest];
-    animationOrder.push(startAnimation);
+    animationsOrder.push(startAnimation);
 
     let endAnimation = {};
     endAnimation.isComparison = true;
     endAnimation.isComparisonStart = false;
     endAnimation.indices = [i, indexOfSmallest];
-    animationOrder.push(endAnimation);
+    animationsOrder.push(endAnimation);
 
     if (array[i] < array[indexOfSmallest]) {
       indexOfSmallest = i;

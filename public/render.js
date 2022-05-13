@@ -9,9 +9,9 @@ export function renderBars(bars) {
   })
 }
 
-export function setBarHeight(array, index) {
+export function setBarHeight(array, index, height) {
   const id = `#${index}`;
-  $(id).css("height", array[index]);
+  $(id).css("height", height);
 }
 
 export function setBarColor(array, index, color) {
@@ -19,27 +19,57 @@ export function setBarColor(array, index, color) {
   $(id).css("background-color", color);
 }
 
-export function animateSelectionSort(animations, bars) {
-  // FOR DEBUGGING PURPOSES
-  console.log("animate selection sort called");
-  console.log(animations.length);
-
-  animations.forEach((animation, index) => {
+export function animateSelectionSort(animationsOrder, bars, speedInMilliseconds) {
+  animationsOrder.forEach((animation, index) => {
     const { isComparison, isComparisonStart, indices } = animation;
     const [i, j] = indices;
-    const IDi = `#${i}`;
-    const IDj = `#${j}`;
+    const blue = "#5E95BD";
+    const green = "#00CDAB"
     if (isComparison) {
-      const color = isComparisonStart ? "#00CDAB" : "black";
+      const color = isComparisonStart ? blue : "black";
       setTimeout(() => {
-        $(IDi).css("background-color", color);
-        $(IDj).css("background-color", color);
-      }, index);
+        setBarColor(bars, i, color);
+        setBarColor(bars, j, color);
+      }, index * speedInMilliseconds);
     } else {
       setTimeout(() => {
-        $(IDi).css("height", `${bars[i]}px`);
-        $(IDj).css("height", `${bars[j]}px`);
-      }, index);
+        setBarHeight(bars, i, bars[i]);
+        setBarHeight(bars, j, bars[j]);
+        setBarColor(bars, i, green);
+      }, index * speedInMilliseconds);
+    }
+  })
+}
+
+export function animateBubbleSort(animationsOrder, bars, speedInMilliseconds) {
+  animationsOrder.forEach((animation, index) => {
+    const {
+      isComparison,
+      isComparisonStart,
+      isCompleted,
+      indices,
+      heights,
+      sortedIndex } = animation;
+    const blue = "#5E95BD";
+    const green = "#00CDAB"
+    if (isComparison) {
+      const [i, j] = indices;
+      const color = isComparisonStart ? blue : "black";
+      setTimeout(() => {
+        setBarColor(bars, i, color);
+        setBarColor(bars, j, color);
+      }, index * speedInMilliseconds);
+    } else if (isCompleted) {
+      setTimeout(() => {
+        setBarColor(bars, sortedIndex, green);
+      }, index * speedInMilliseconds);
+    } else {
+      const [i, j] = indices;
+      const [heightI, heightJ] = heights;
+      setTimeout(() => {
+        setBarHeight(bars, i, heightI);
+        setBarHeight(bars, j, heightJ);
+      }, index * speedInMilliseconds);
     }
   })
 }

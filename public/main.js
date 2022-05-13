@@ -1,12 +1,13 @@
-import { renderBars, animateSelectionSort } from "./render.js";
+import { renderBars, animateSelectionSort, animateBubbleSort } from "./render.js";
 import { selectionSort } from "./selectionSort.js";
 import { insertionSort } from "./insertionSort.js";
 import { bubbleSort } from "./bubbleSort.js";
 import { quicksort } from "./quicksort.js";
 
-const SIZE = 150;
-const MIN_HEIGHT = 50;
+const SIZE = 100;
+const MIN_HEIGHT = 25;
 const MAX_HEIGHT = 600;
+const SPEED = 300;
 let bars = [];
 let algorithm = selectionSort;
 let animation = animateSelectionSort;
@@ -25,26 +26,28 @@ $(".algorithms-list>li").click(function (event) {
   switch (algorithmType) {
     case "Selection Sort":
       algorithm = selectionSort;
-      animation = selectionSort;
+      animation = animateSelectionSort;
       break;
     case "Insertion Sort":
       algorithm = insertionSort;
       break;
     case "Bubble Sort":
       algorithm = bubbleSort;
+      animation = animateBubbleSort;
       break;
     case "Quicksort":
       algorithm = quicksort;
       break;
     default:
       algorithm = selectionSort;
+      animation = animateSelectionSort;
   }
   $(".selected-algorithm").text(algorithmType);
 })
 
 $("#sort-button").click(function (event) {
-  const animationOrder = algorithm(bars);
-  animation(animationOrder, bars);
+  const animationsOrder = algorithm(bars);
+  animation(animationsOrder, bars, SPEED);
 })
 
 $("#random-button").click(function (event) {
