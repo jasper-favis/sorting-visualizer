@@ -6,40 +6,32 @@ export function bubbleSort(array) {
     for (let j = array.length - 1; j > i; j--) {
 
       // Store comparison start and end animations.
-      let startAnimation = {};
-      startAnimation.isComparison = true;
-      startAnimation.isComparisonStart = true;
-      startAnimation.isCompleted = false;
-      startAnimation.indices = [j - 1, j];
-      animationsOrder.push(startAnimation);
+      const startComparisonAnimation = {};
+      startComparisonAnimation.type = "Start Comparison Animation";
+      startComparisonAnimation.indices = [j - 1, j];
+      animationsOrder.push(startComparisonAnimation);
 
-      let endAnimation = {};
-      endAnimation.isComparison = true;
-      endAnimation.isComparisonStart = false;
-      endAnimation.isCompleted = false;
-      endAnimation.indices = [j - 1, j];
-      animationsOrder.push(endAnimation);
+      const endComparisonAnimation = {};
+      endComparisonAnimation.type = "End Comparison Animation";
+      endComparisonAnimation.indices = [j - 1, j];
+      animationsOrder.push(endComparisonAnimation);
 
       if (array[j] < array[j - 1]) {
         swap(array, j - 1, j);
 
         // Store swap animation.
-        let swapAnimation = {};
-        swapAnimation.isComparison = false;
-        swapAnimation.isComparisonStart = false;
-        swapAnimation.isCompleted = false;
+        const swapAnimation = {};
+        swapAnimation.type = "Swap Animation";
         swapAnimation.indices = [j - 1, j];
         swapAnimation.heights = [array[j - 1], array[j]];
         animationsOrder.push(swapAnimation);
       }
     }
-    // Store sorted bar.
-    let completedAnimation = {};
-    completedAnimation.isComparison = false;
-    completedAnimation.isComparisonStart = false;
-    completedAnimation.isCompleted = true;
-    completedAnimation.sortedIndex = i;
-    animationsOrder.push(completedAnimation);
+    // Store sorted bar animation.
+    const sortedBarAnimation = {};
+    sortedBarAnimation.type = "Sorted Bar Animation - Set Color";
+    sortedBarAnimation.index = i;
+    animationsOrder.push(sortedBarAnimation);
   }
   return animationsOrder;
 }

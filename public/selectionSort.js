@@ -20,11 +20,18 @@ export function selectionSort(array) {
     swap(array, i, indexOfSmallest);
 
     // Store set animation.
-    const sortedAnimation = {};
-    sortedAnimation.type = "Sorted Animation";
-    sortedAnimation.sortedIndex = i;
-    sortedAnimation.sortedHeight = array[i];
-    animationsOrder.push(sortedAnimation);
+    // const sortedBarAnimation = {};
+    // sortedBarAnimation.type = "Sorted Bar Animation - Set Color and Height";
+    // sortedBarAnimation.index = i;
+    // sortedBarAnimation.height = array[i];
+    // animationsOrder.push(sortedBarAnimation);
+
+    // Store swap animation but only color sorted bar.
+    const swapAnimation = {};
+    swapAnimation.type = "Swap Animation - Color Sorted Bar";
+    swapAnimation.indices = [i, indexOfSmallest];
+    swapAnimation.heights = [array[i], array[indexOfSmallest]];
+    animationsOrder.push(swapAnimation);
   }
   return animationsOrder;
 }
