@@ -56,10 +56,15 @@ nav {
   margin-right: 15px;
 }
 
+.nav-logo-container {
+  margin-left: 40px;
+}
+
 .dd-menu {
   width: 100%;
   bottom: 0;
   position: absolute;
+  color: rgb(255, 255, 255);
   transform: translateY(105%);
   background-color: rgb(79, 114, 143);
 }
@@ -88,26 +93,6 @@ nav {
   flex-direction: column;
 }
 
-.selected-algorithm-container {
-  display: flex;
-}
-
-.selected-algorithm-container>p {
-  margin-right: 15px;
-  display: flex;
-  align-items: center;
-}
-
-.selected-algorithm {
-  display: flex;
-  align-items: center;
-  padding: 10px 15px;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 5px;
-  border-color: rgba(0, 0, 0, 0.5);
-}
-
 .controls-container {
   margin-top: 50px;
   margin-bottom: 50px;
@@ -118,7 +103,7 @@ nav {
 }
 
 .controls-button {
-  min-width: 100px;
+  min-width: 150px;
   font-size: 0.8rem;
   padding: 15px 20px;
   display: flex;
@@ -134,7 +119,17 @@ nav {
   margin-right: 10px;
 }
 
+#choose-algorithm-button {
+  position: relative;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: rgb(79, 114, 143);
+  background-color: rgb(79, 114, 143);
+  color: rgb(255, 255, 255);
+}
+
 #speed-button {
+  width: 150px;
   position: relative;
   color: white;
   text-transform: lowercase;
@@ -156,7 +151,7 @@ nav {
 }
 
 .speed-list>li {
-  padding: 15px 20px;
+  padding: 15px 15px;
   white-space: nowrap;
   z-index: 5;
 }
@@ -168,9 +163,13 @@ nav {
   transition-timing-function: ease-out;
 }
 
+.bars-container {
+  display: flex;
+  justify-content: center;
+}
+
 .bar {
   display: inline-block;
-  width: 15px;
   border-width: 1px;
   border-style: solid;
   border-color: rgba(0, 0, 0, 0.5);
@@ -178,6 +177,70 @@ nav {
 
 .bar:not(:last-child) {
   margin-right: 2px;
+}
+
+@media screen and (min-width: 1200px) {
+  nav {
+    width: 1100px;
+  }
+}
+
+@media screen and (min-width: 900px) and (max-width: 1199px) {
+  nav {
+    width: 800px;
+  }
+}
+
+@media screen and (min-width: 700px) and (max-width: 899px) {
+  nav {
+    width: 650px;
+  }
+}
+
+@media screen and (min-width: 550px) and (max-width: 699px) {
+  nav {
+    width: 500px;
+  }
+}
+
+@media screen and (max-width: 549px) {
+  nav {
+    width: 100vw;
+  }
+
+  .controls-container {
+    margin-top: 25px;
+  }
+
+  .controls {
+    display: grid;
+    grid-template-areas:
+      "sort random"
+      "algorithm speed";
+  }
+
+  #sort-button {
+    grid-area: sort;
+  }
+
+  #random-button {
+    grid-area: random;
+  }
+
+  #choose-algorithm-button {
+    grid-area: algorithm;
+  }
+
+  #speed-button {
+    grid-area: speed;
+  }
+
+  .controls-button {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .displayBlock {

@@ -1,10 +1,12 @@
-export function renderBars(bars) {
+export function renderBars(bars, barWidth, barGap) {
   $(".bars").empty();
   bars.forEach((bar, index) => {
     const div = $("<div></div>")
       .attr("id", `${index}`)
       .attr("class", "bar")
+      .css("width", `${barWidth}px`)
       .css("height", `${bar}px`)
+      .css("margin-right", `${barGap}px`)
     $(".bars").append(div);
   })
 }
