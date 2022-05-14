@@ -9,8 +9,9 @@ export function renderBars(bars) {
   })
 }
 
-export function animate(animationsOrder, bars, speedInMilliseconds, inProgress) {
-  inProgress = true;
+export function animate(animationsOrder, bars, speedInMilliseconds, isSorting) {
+  isSorting.inProgress = true;
+  grayOutSortButton(isSorting.inProgress);
   animationsOrder.forEach((animation, animationIndex) => {
     const {
       type,
@@ -94,7 +95,8 @@ export function animate(animationsOrder, bars, speedInMilliseconds, inProgress) 
             setBarColor(bars, i, green);
           }, i * speedInMilliseconds);
         }
-        inProgress = false;
+        isSorting.inProgress = false;
+        grayOutSortButton(isSorting.inProgress);
       }, animationIndex * speedInMilliseconds);
     }
   })
@@ -109,6 +111,21 @@ export function setBarColor(array, index, color) {
   const id = `#${index}`;
   $(id).css("background-color", color);
 }
+
+export function stopAnimations() {
+  var id = window.setTimeout(function () { }, 0);
+  while (id--) { window.clearTimeout(id); }
+}
+
+export function grayOutSortButton(isSortingInProgress) {
+  if (isSortingInProgress) {
+    $("#sort-button").css("opacity", "0.3");
+  } else {
+    $("#sort-button").css("opacity", "1");
+  }
+}
+
+
 
 // function getBarColor(array, index) {
 //   const id = `#${index}`;

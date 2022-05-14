@@ -88,13 +88,29 @@ nav {
   flex-direction: column;
 }
 
-.controls-container {
-  margin-top: 50px;
-  margin-bottom: 50px;
+.selected-algorithm-container {
+  display: flex;
+}
+
+.selected-algorithm-container>p {
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
 }
 
 .selected-algorithm {
-  padding-bottom: 20px;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: rgba(0, 0, 0, 0.5);
+}
+
+.controls-container {
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .controls {

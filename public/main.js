@@ -5,7 +5,7 @@
 //   animateBubbleSort,
 //   animateQuicksort
 // } from "./render.js";
-import { renderBars, animate } from "./render.js";
+import { renderBars, animate, stopAnimations, grayOutSortButton } from "./render.js";
 import { selectionSort } from "./selectionSort.js";
 import { insertionSort } from "./insertionSort.js";
 import { bubbleSort } from "./bubbleSort.js";
@@ -14,6 +14,7 @@ import { quicksort } from "./quicksort.js";
 const SIZE = 60;
 const MIN_HEIGHT = 25;
 const MAX_HEIGHT = 600;
+const isSorting = { inProgress: false };
 const ANIMATION_SPEEDS = {
   "very slow": 250,
   "slow": 100,
@@ -21,10 +22,9 @@ const ANIMATION_SPEEDS = {
   "fast": 1 / 2
 }
 let bars = [];
-let algorithm = selectionSort;
-// let animation = animateSelectionSort;
-let sortingInProgress = false;
 let animationSpeed = 1;
+let algorithm = selectionSort;
+
 
 $(document).ready(function () {
   bars = getRandomBars();
@@ -53,18 +53,22 @@ $(".algorithms-list>li").click(function (event) {
     default:
       algorithm = selectionSort;
   }
+  isSorting.inProgress = false;
+  grayOutSortButton(isSorting.inProgress);
+  generateRandomBars();
   $(".selected-algorithm").text(algorithmType);
 })
 
 $("#sort-button").click(function (event) {
+  if (isSorting.inProgress) return;
   const animationsOrder = algorithm(bars);
-  // animation(animationsOrder, bars, SPEED);
-  animate(animationsOrder, bars, animationSpeed, sortingInProgress);
+  animate(animationsOrder, bars, animationSpeed, isSorting);
 })
 
 $("#random-button").click(function (event) {
-  bars = getRandomBars();
-  renderBars(bars);
+  isSorting.inProgress = false;
+  grayOutSortButton(isSorting.inProgress);
+  generateRandomBars();
 })
 
 $("#speed-button").click(function (event) {
@@ -76,6 +80,12 @@ $(".speed-list>li").click(function (event) {
   $("#speed-button>p").text(speed);
   animationSpeed = ANIMATION_SPEEDS[speed];
 })
+
+function generateRandomBars() {
+  stopAnimations();
+  bars = getRandomBars();
+  renderBars(bars);
+}
 
 function getRandomBars() {
   let newBars = [];
